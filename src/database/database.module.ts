@@ -27,3 +27,4 @@ import config from '../config';
     exports: [TypeOrmModule]
 })
 export class DatabaseModule { }
+//brayan es hermoso xdxddxddxdx

@@ -6,6 +6,8 @@ services:
     container_name: auth_api_prod
     env_file:
       - .prod.env
+    environment:
+      NODE_ENV: prod
     depends_on:
       postgres:
         condition: service_healthy
@@ -16,17 +18,15 @@ services:
   postgres:
     image: postgres:17
     container_name: auth_postgres_prod
-    environment:
-      POSTGRES_DB: auth_prod_db
-      POSTGRES_USER: prod_user
-      POSTGRES_PASSWORD: secure_password
+    env_file:
+      - .prod.env
     ports:
       - "5434:5432"
     volumes:
       - postgres_prod_data:/var/lib/postgresql/data
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U prod_user -d auth_prod_db"]
+      test: [ "CMD-SHELL", "pg_isready -U prod_user -d auth_prod_db" ]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -35,7 +35,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: root@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
-    ports: 
+    ports:
       - "5052:80"
 volumes:
   postgres_prod_data:
