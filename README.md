@@ -270,7 +270,7 @@ docker compose -p auth_prod -f docker-compose.prod.yml up -d --build
 
 # Autora
 
-Sofia Valcarcel
+S. B. S.
 
 ---
 
